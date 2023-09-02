@@ -1,0 +1,42 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Blog {
+  _id: String!
+
+  """Blog Description"""
+  description: String!
+
+  """Blog Title"""
+  title: String!
+}
+
+input CreateBlogInput {
+  """Blog Description"""
+  description: String!
+
+  """Blog Title"""
+  title: String!
+}
+
+type Mutation {
+  createBlog(createBlogInput: CreateBlogInput!): Blog!
+  removeBlog(id: String!): Blog!
+  updateBlog(updateBlogInput: UpdateBlogInput!): Blog!
+}
+
+type Query {
+  FindOne(_id: String!): Blog!
+  blog: [Blog!]!
+}
+
+input UpdateBlogInput {
+  _id: String!
+
+  """Blog Description"""
+  description: String
+
+  """Blog Title"""
+  title: String
+}
