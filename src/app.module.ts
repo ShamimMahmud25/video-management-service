@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BlogModule } from './modules/blog/blog.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
+import { VideoModule } from './modules/video/video.module';
 
 @Module({
   imports: [
@@ -25,7 +25,7 @@ import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
         useNewUrlParser: true,
       },
     ),
-    BlogModule,
+    VideoModule
   ],
   controllers: [AppController],
   providers: [AppService],
