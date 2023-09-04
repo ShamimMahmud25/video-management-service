@@ -3,19 +3,19 @@ import { VideoService } from './video.service';
 import { Video } from './entities/video.entity';
 
 import { CreateVideoInput } from './dto/create-video-input';
-import { UpdateVideoInput } from './dto/update-video.input';
+import { UpdateVideoInput } from './dto/update-video-input';
 
 @Resolver(() => Video)
 export class VideoResolver {
   constructor(private readonly videoService: VideoService) {}
 
   @Mutation(() => Video)
-  createVideo(@Args('createVideoInput') createVideoInput: CreateVideoInput) {
-    return this.videoService.create(createVideoInput);
+ async createVideo(@Args('createVideoInput') createVideoInput: CreateVideoInput):Promise<Video> {
+    return await this.videoService.create(createVideoInput);
   }
 
   @Query(() => Video, { name: 'FindOne' })
-  async findOne(@Args('_id', { type: () => String }) id: string) {
+  async findOne(@Args('id', { type: () => String }) id: string):Promise<Video> {
     return await this.videoService.findOne(id);
   }
 
@@ -27,12 +27,12 @@ export class VideoResolver {
   }
 
   @Mutation(() => Video)
-  updateVideo(@Args('updateVideoInput') updateVideoInput: UpdateVideoInput) {
-    return this.videoService.update(updateVideoInput._id, updateVideoInput);
+  async updateVideo(@Args('updateVideoInput') updateVideoInput: UpdateVideoInput):Promise<Video> {
+    return await this.videoService.update(updateVideoInput._id, updateVideoInput);
   }
 
   @Mutation(() => Video)
-  deleteVideo(@Args('id', { type: () => String }) id: string) {
-    return this.videoService.delete(id);
+  async deleteVideo(@Args('id', { type: () => String }) id: string):Promise<Video> {
+    return await this.videoService.delete(id);
   }
 }

@@ -17,15 +17,15 @@ export class Video {
   @Field(() => String, { description: 'Video Description',nullable:true })
   description: string;
   @Prop({ required: true })
-  @Field(() => String, { description: 'Video Description' })
+  @Field(() => String, { description: 'Video url' })
   url: string;
-  @Field(() => Date, { description: 'Video Description',nullable:true })
+  @Field(() => Date, { description: 'Video updation date',nullable:true })
   @Prop()
   updatedAt: Date;
-  @Field(() => Date, { description: 'Video Description' ,nullable:true})
+  @Field(() => Date, { description: 'Video creation date' ,nullable:true})
   @Prop()
   createdAt?: Date;
-  @Field(() => String, { description: 'Video Description' ,nullable:true})
+  @Field(() => String, { description: 'Video ID' ,nullable:true})
   @Prop()
   videoID?:string;
 }

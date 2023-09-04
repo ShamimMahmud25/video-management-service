@@ -7,9 +7,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { join } from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import { VideoModule } from './modules/video/video.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       debug: false,
@@ -18,14 +23,11 @@ import { VideoModule } from './modules/video/video.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
     }),
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:Nopassword@cluster0.vygpv.mongodb.net/FanFire?retryWrites=true&w=majority',
-      {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-      },
-    ),
-    VideoModule
+    MongooseModule.forRoot(process.env.DB_URI, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+    }),
+    VideoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
